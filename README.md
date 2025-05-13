@@ -1,6 +1,6 @@
-# FigureFinder
+# SciFigHunter
 
-FigureFinder is a lightweight command-line tool that helps you locate figures from a collection of scientific PDFs. It extracts all images and their potential captions from PDFs, embeds them using CLIP (Contrastive Language–Image Pretraining), and allows you to search for relevant figures using natural language queries.
+SciFigHunter is a lightweight command-line tool that helps you locate figures from a collection of scientific PDFs. It extracts all images and their potential captions from PDFs, embeds them using CLIP (Contrastive Language–Image Pretraining), and allows you to search for relevant figures using natural language queries.
 
 ## Features
 - 🔍 Extract all figures and attempt to find corresponding captions from PDF files using PyMuPDF.

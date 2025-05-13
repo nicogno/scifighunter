@@ -178,7 +178,7 @@ def search_images(query, index_path, top_k=5):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="FigureFinder: extract and search figures from scientific PDFs")
+    parser = argparse.ArgumentParser(description="SciFigHunter: extract and search figures from scientific PDFs")
     subparsers = parser.add_subparsers(dest="command")
 
     extract_parser = subparsers.add_parser("extract", help="Extract figures from PDFs")
