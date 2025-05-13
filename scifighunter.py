@@ -94,7 +94,7 @@ def extract_from_directory(pdf_dir, output_dir):
     print(f"Extracted {total_imgs} images from {len(pdf_paths)} PDFs.")
 
 
-def build_image_embeddings(figures_dir, output_index):
+def build_image_embeddings(figures_dir, output_index, alpha_weight=0.5): # Added alpha_weight parameter with default
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model, preprocess = clip.load("ViT-B/32", device=device)
 
@@ -134,8 +134,8 @@ def build_image_embeddings(figures_dir, output_index):
                         text_tokens = clip.tokenize([caption], truncate=True).to(device)
                         text_features = model.encode_text(text_tokens)
                         text_features /= text_features.norm(dim=-1, keepdim=True)
-                        alpha = 1.0  # Weight for image features
-                        combined = (alpha * image_features + (1 - alpha) * text_features)
+                        # Use the passed alpha_weight
+                        combined = (alpha_weight * image_features + (1 - alpha_weight) * text_features)
                         combined /= combined.norm(dim=-1, keepdim=True)  # Re-normalize
                     else:
                         combined = image_features # image_features is already normalized
@@ -188,6 +188,7 @@ def main():
     embed_parser = subparsers.add_parser("embed", help="Build CLIP embeddings for images")
     embed_parser.add_argument("--figures_dir", type=str, required=True)
     embed_parser.add_argument("--index_file", type=str, required=True)
+    embed_parser.add_argument("--alpha", type=float, default=0.5, help="Weight for image features when combining with text features (e.g., 0.7 for 70% image, 30% text). Default: 0.5")
 
     search_parser = subparsers.add_parser("search", help="Search for figures using a prompt")
     search_parser.add_argument("--index_file", type=str, required=True)
@@ -199,7 +200,7 @@ def main():
     if args.command == "extract":
         extract_from_directory(args.pdf_dir, args.output_dir)
     elif args.command == "embed":
-        build_image_embeddings(args.figures_dir, args.index_file)
+        build_image_embeddings(args.figures_dir, args.index_file, alpha_weight=args.alpha) # Pass alpha here
     elif args.command == "search":
         search_images(args.query, args.index_file, top_k=args.top_k)
     else:
