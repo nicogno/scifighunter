@@ -21,9 +21,7 @@ SciFigHunter is a web application that helps you locate figures from a collectio
 
 ## Demo
 
-```markdown
 ![SciFigHunter Demo GIF](assets/demo.gif)
-```
 
 ## Installation
 
