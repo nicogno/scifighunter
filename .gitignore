@@ -1,3 +1,13 @@
 *.pkl
 figures/
 papers/
+output/
+temp_*
+test_*
+*.mov
+*docs
+INSTRUCTIONS.md
+*.pdf
+*.log
+*.DS_Store
+__pycache__/

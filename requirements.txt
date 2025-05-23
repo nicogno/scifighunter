@@ -1,9 +1,11 @@
-torch
-ftfy
-regex
+chromadb
 tqdm
+torch
 Pillow
 numpy
-PyMuPDF
-git+https://github.com/openai/CLIP.git
-
+open_clip_torch
+dash>=2.9.0
+dash-bootstrap-components>=1.0.0
+PyMuPDF>=1.18.0,<1.23.0
+torchvision
+opencv-python-headless
